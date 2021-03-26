@@ -1,0 +1,43 @@
+diff --git a/ampy/pyboard.py b/ampy/pyboard.py
+index 0a9ed95..216a753 100644
+--- a/ampy/pyboard.py
++++ b/ampy/pyboard.py
+@@ -189,20 +189,15 @@ class Pyboard:
+             self.serial.read(n)
+             n = self.serial.inWaiting()
+ 
+-        for retry in range(0, 5): 
+-            self.serial.write(b'\r\x01') # ctrl-A: enter raw REPL
+-            data = self.read_until(1, b'raw REPL; CTRL-B to exit\r\n>')
+-            if data.endswith(b'raw REPL; CTRL-B to exit\r\n>'):
+-                break
+-            else:
+-                if retry >= 4:
+-                    print(data)
+-                    raise PyboardError('could not enter raw repl')
+-                time.sleep(0.2)
++        self.serial.write(b'\r\x01') # ctrl-A: enter raw REPL
++        data = self.read_until(1, b'raw REPL; CTRL-B to exit')
++        if not data.endswith(b'raw REPL; CTRL-B to exit'):
++            print(data)
++            raise PyboardError('could not enter raw repl')
+ 
+         self.serial.write(b'\x04') # ctrl-D: soft reset
+-        data = self.read_until(1, b'soft reboot\r\n')
+-        if not data.endswith(b'soft reboot\r\n'):
++        data = self.read_until(1, b'soft reboot')
++        if not data.endswith(b'soft reboot'):
+             print(data)
+             raise PyboardError('could not enter raw repl')
+         # By splitting this into 2 reads, it allows boot.py to print stuff,
+@@ -215,8 +210,8 @@ class Pyboard:
+         time.sleep(0.1)           # (slight delay before second interrupt
+         self.serial.write(b'\x03')
+         # End modification above.
+-        data = self.read_until(1, b'raw REPL; CTRL-B to exit\r\n')
+-        if not data.endswith(b'raw REPL; CTRL-B to exit\r\n'):
++        data = self.read_until(1, b'raw REPL; CTRL-B to exit')
++        if not data.endswith(b'raw REPL; CTRL-B to exit'):
+             print(data)
+             raise PyboardError('could not enter raw repl')
+ 
