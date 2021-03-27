@@ -1,6 +1,6 @@
 # RGB Illuminator Ring For Industry Microscope 
 
-<img src="img/rgb_ring_illuminator.jpg" alt="rgb_ring_illuminator" width="200"/>
+<img src="img/rgb_ring_illuminator.png" alt="rgb_ring_illuminator" width="400"/>
 
 Demo: https://youtu.be/8CfzSZ4Gehk
 
@@ -70,7 +70,7 @@ Easiest is probably to start from a diagonal so you can define half and duplicat
 
 To focus light towards the center of the ring, glue the 30° lenses slightly tilted with e.g. some UV glue.
 
-<img src="img/lenses.jpg" alt="tilted lenses" width="200"/>
+<img src="img/lenses.jpg" alt="tilted lenses" width="300"/>
 
 
 ## Misc
