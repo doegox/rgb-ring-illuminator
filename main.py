@@ -56,22 +56,22 @@ def off(np):
 def on(np):
     esprgb(np, [WHITE]*24)
 
+def demo(np):
+    rainbow_cycle(np, 1, 1)
+    off(np)
+    #color_chase(np, RED, 0.1, 3, 3)
+    color_chase(np, WHITE, 0.1, 1, 3)
+    color_chase(np, WHITE, 0.1, 4, 3)
+    #color_chase(np, 'rainbow', 0.1, 1, 3)
+    for _ in range(3):
+        esprgb(np, ([RED]*4+[BLACK]*2+[GREEN]*4+[BLACK]*2)*2)
+        time.sleep(1)
+        esprgb(np, ([GREEN]*4+[BLACK]*2+[RED]*4+[BLACK]*2)*2)
+        time.sleep(1)
+    on(np)
+    time.sleep(2)
+    off(np)
+
 # GPIO5 == D1 on NodeMCU
 np = neopixel.NeoPixel(machine.Pin(5), 24)
-rainbow_cycle(np, 1, 1)
-
-off(np)
-#color_chase(np, RED, 0.1, 3, 3)
-color_chase(np, WHITE, 0.1, 1, 3)
-color_chase(np, WHITE, 0.1, 4, 3)
-#color_chase(np, 'rainbow', 0.1, 1, 3)
-
-for _ in range(3):
-    esprgb(np, ([RED]*4+[BLACK]*2+[GREEN]*4+[BLACK]*2)*2)
-    time.sleep(1)
-    esprgb(np, ([GREEN]*4+[BLACK]*2+[RED]*4+[BLACK]*2)*2)
-    time.sleep(1)
-
-on(np)
-time.sleep(2)
-off(np)
+demo(np)
